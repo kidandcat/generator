@@ -1,16 +1,8 @@
 {
-  "name": "express-generator",
+  "name": "jairo-express",
   "description": "Express' application generator",
-  "version": "4.13.1",
-  "author": "TJ Holowaychuk <tj@vision-media.ca>",
-  "contributors": [
-    "Aaron Heckmann <aaron.heckmann+github@gmail.com>",
-    "Ciaran Jessup <ciaranj@gmail.com>",
-    "Douglas Christopher Wilson <doug@somethingdoug.com>",
-    "Guillermo Rauch <rauchg@gmail.com>",
-    "Jonathan Ong <me@jongleberry.com>",
-    "Roman Shtylman <shtylman+expressjs@gmail.com>"
-  ],
+  "version": "0.0.0",
+  "author": "Jairo <kidandcat@gmail.com>",
   "keywords": [
     "express",
     "framework",
@@ -22,7 +14,7 @@
     "app",
     "api"
   ],
-  "repository": "expressjs/generator",
+  "repository": "kidandcat/generator",
   "license": "MIT",
   "dependencies": {
     "commander": "2.7.1",
