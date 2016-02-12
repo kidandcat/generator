@@ -101,7 +101,6 @@ function createApplication(app_name, path) {
   var app = loadTemplate('js/app.js');
   var www = loadTemplate('js/www');
   var index = loadTemplate('js/routes/index.js');
-  var users = loadTemplate('js/routes/users.js');
 
   // CSS
   var css = loadTemplate('css/style.css');
@@ -136,54 +135,15 @@ function createApplication(app_name, path) {
 
     mkdir(path + '/routes', function(){
       write(path + '/routes/index.js', index);
-      write(path + '/routes/users.js', users);
       complete();
     });
 
     mkdir(path + '/views', function(){
-      switch (program.template) {
-        case 'ejs':
-          copy_template('ejs/index.ejs', path + '/views/index.ejs');
-          copy_template('ejs/error.ejs', path + '/views/error.ejs');
-          break;
-        case 'jade':
-          copy_template('jade/index.jade', path + '/views/index.jade');
-          copy_template('jade/layout.jade', path + '/views/layout.jade');
-          copy_template('jade/error.jade', path + '/views/error.jade');
-          break;
-        case 'hjs':
-          copy_template('hogan/index.hjs', path + '/views/index.hjs');
-          copy_template('hogan/error.hjs', path + '/views/error.hjs');
-          break;
-        case 'hbs':
-          copy_template('hbs/index.hbs', path + '/views/index.hbs');
-          copy_template('hbs/layout.hbs', path + '/views/layout.hbs');
-          copy_template('hbs/error.hbs', path + '/views/error.hbs');
-          break;
-      }
+        copy_template('html/index.html', path + '/views/index.html');
       complete();
     });
 
-    // CSS Engine support
-    switch (program.css) {
-      case 'less':
-        app = app.replace('{css}', eol + 'app.use(require(\'less-middleware\')(path.join(__dirname, \'public\')));');
-        break;
-      case 'stylus':
-        app = app.replace('{css}', eol + 'app.use(require(\'stylus\').middleware(path.join(__dirname, \'public\')));');
-        break;
-      case 'compass':
-        app = app.replace('{css}', eol + 'app.use(require(\'node-compass\')({mode: \'expanded\'}));');
-        break;
-      case 'sass':
-        app = app.replace('{css}', eol + 'app.use(require(\'node-sass-middleware\')({\n  src: path.join(__dirname, \'public\'),\n  dest: path.join(__dirname, \'public\'),\n  indentedSyntax: true,\n  sourceMap: true\n}));');
-        break;
-      default:
-        app = app.replace('{css}', '');
-    }
 
-    // Template support
-    app = app.replace('{views}', program.template);
 
     // package.json
     var pkg = {
@@ -201,38 +161,8 @@ function createApplication(app_name, path) {
       }
     }
 
-    switch (program.template) {
-      case 'jade':
-        pkg.dependencies['jade'] = '~1.11.0';
-        break;
-      case 'ejs':
-        pkg.dependencies['ejs'] = '~2.3.3';
-        break;
-      case 'hjs':
-        pkg.dependencies['hjs'] = '~0.0.6';
-        break;
-      case 'hbs':
-        pkg.dependencies['hbs'] = '~3.1.0';
-        break;
-      default:
-    }
 
-    // CSS Engine support
-    switch (program.css) {
-      case 'less':
-        pkg.dependencies['less-middleware'] = '1.0.x';
-        break;
-      case 'compass':
-        pkg.dependencies['node-compass'] = '0.2.3';
-        break;
-      case 'stylus':
-        pkg.dependencies['stylus'] = '0.42.3';
-        break;
-      case 'sass':
-        pkg.dependencies['node-sass-middleware'] = '0.8.0';
-        break;
-      default:
-    }
+
 
     // sort dependencies like npm(1)
     pkg.dependencies = sortedObject(pkg.dependencies);
