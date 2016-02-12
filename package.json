@@ -24,7 +24,7 @@
   "main": "bin/express",
   "preferGlobal": true,
   "bin": {
-    "express": "./bin/express"
+    "jainerator": "./bin/express"
   },
   "devDependencies": {
     "mocha": "2.2.5",

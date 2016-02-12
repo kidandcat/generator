@@ -104,32 +104,13 @@ function createApplication(app_name, path) {
 
   // CSS
   var css = loadTemplate('css/style.css');
-  var less = loadTemplate('css/style.less');
-  var stylus = loadTemplate('css/style.styl');
-  var compass = loadTemplate('css/style.scss');
-  var sass = loadTemplate('css/style.sass');
 
   mkdir(path, function(){
     mkdir(path + '/public');
-    mkdir(path + '/public/javascripts');
-    mkdir(path + '/public/images');
-    mkdir(path + '/public/stylesheets', function(){
-      switch (program.css) {
-        case 'less':
-          write(path + '/public/stylesheets/style.less', less);
-          break;
-        case 'stylus':
-          write(path + '/public/stylesheets/style.styl', stylus);
-          break;
-        case 'compass':
-          write(path + '/public/stylesheets/style.scss', compass);
-          break;
-        case 'sass':
-          write(path + '/public/stylesheets/style.sass', sass);
-          break;
-        default:
-          write(path + '/public/stylesheets/style.css', css);
-      }
+    mkdir(path + '/public/js');
+    mkdir(path + '/public/img');
+    mkdir(path + '/public/css', function(){
+      write(path + '/public/css/style.css', css);
       complete();
     });
 
@@ -255,11 +236,6 @@ function main() {
   // App name
   var appName = path.basename(path.resolve(destinationPath));
 
-  // Template engine
-  program.template = 'jade';
-  if (program.ejs) program.template = 'ejs';
-  if (program.hogan) program.template = 'hjs';
-  if (program.hbs) program.template = 'hbs';
 
   // Generate application
   emptyDirectory(destinationPath, function (empty) {
