@@ -1,7 +1,7 @@
 {
-  "name": "jairo-express",
+  "name": "jairo-generator",
   "description": "Express' application generator",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Jairo <kidandcat@gmail.com>",
   "keywords": [
     "express",
@@ -24,7 +24,7 @@
   "main": "bin/express",
   "preferGlobal": true,
   "bin": {
-    "jainerator": "./bin/express"
+    "gen": "./bin/express"
   },
   "devDependencies": {
     "mocha": "2.2.5",
