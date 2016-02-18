@@ -1,7 +1,7 @@
 {
   "name": "jairo-generator",
   "description": "Express' application generator",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Jairo <kidandcat@gmail.com>",
   "keywords": [
     "express",
