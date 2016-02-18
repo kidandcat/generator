@@ -7,7 +7,19 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 
+var http = require('http');
+//var https = require('https');
+//var privateKey  = fs.readFileSync('private.pem', 'utf8');
+//var certificate = fs.readFileSync('public.pem', 'utf8');
+//var credentials = {key: privateKey, cert: certificate};
+
 var app = express();
+
+var httpServer = http.createServer(app);
+//var httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(80);
+//httpsServer.listen(443);
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
@@ -49,4 +61,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-app.listen('80');
