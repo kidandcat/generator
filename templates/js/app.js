@@ -4,19 +4,38 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var toobusy = require('toobusy-js');
 var routes = require('./routes/index');
 
 var http = require('http');
 //var https = require('https');
-//var privateKey  = fs.readFileSync('private.pem', 'utf8');
-//var certificate = fs.readFileSync('public.pem', 'utf8');
+//var privateKey = fs.readFileSync('/etc/letsencrypt/live/galax.be/privkey.pem', 'utf8');
+//var certificate = fs.readFileSync('/etc/letsencrypt/live/galax.be/cert.pem', 'utf8');
 //var credentials = {key: privateKey, cert: certificate};
 
 var app = express();
 
 var httpServer = http.createServer(app);
 //var httpsServer = https.createServer(credentials, app);
+
+//redirect http to https
+/*app.use(function(req, res, next) {
+  if (req.protocol != 'https') {
+    res.redirect(301, "https://" + req.headers["host"] + req.url);
+  } else {
+    next();
+  } 
+});*/
+
+//toobusy.maxLag(40);
+//toobusy.interval(700);
+app.use(function(req, res, next) {
+  if (toobusy()) {
+    res.send(503, "I'm busy right now, sorry.");
+  } else {
+    next();
+  } 
+});
 
 httpServer.listen(80);
 //httpsServer.listen(443);
